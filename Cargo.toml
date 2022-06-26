@@ -10,4 +10,13 @@ repository = "https://github.com/0xAX/whirl"
 readme = "README.md"
 edition = "2021"
 
+[bin]
+name = "whirl"
+
+[workspace]
+members = [
+    "crates/radius"
+]
+
 [dependencies]
+radius = { path = "crates/radius" }

@@ -3,5 +3,12 @@
 version = 3
 
 [[package]]
+name = "radius"
+version = "0.0.1"
+
+[[package]]
 name = "whirl"
 version = "0.0.1-dev"
+dependencies = [
+ "radius",
+]

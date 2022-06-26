@@ -1,0 +1,12 @@
+[package]
+name = "radius"
+version = "0.0.1"
+authors = ["Alexander Kuleshov <kuleshovmail@gmail.com>"]
+license = "Apache-2.0"
+description = "RADIUS client"
+keywords = ["networking", "radius"]
+repository = "https://github.com/0xAX/whirl"
+readme = "README.md"
+edition = "2021"
+
+[dependencies]
