@@ -1,9 +1,13 @@
 [package]
 name = "whirl"
-version = "0.0.1"
-edition = "2021"
+version = "0.0.1-dev"
 authors = ["Alexander Kuleshov <kuleshovmail@gmail.com>"]
-description = "Simple load testing tool"
 license = "Apache-2.0"
+description = "Simple load testing tool"
+exclude = [".github/"]
+keywords = ["cli", "load-testing", "performance"]
+repository = "https://github.com/0xAX/whirl"
+readme = "README.md"
+edition = "2021"
 
 [dependencies]
