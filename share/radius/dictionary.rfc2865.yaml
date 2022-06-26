@@ -154,51 +154,51 @@ types:
         value: 11
   framed-protocol:
     type: integer
-    values:    
-    - name: "PPP"
-      value: 1
-    - name: "SLIM"
-      value: 2
-    - name: "ARAP"
-      value: 3
-    - name: "Gandalf-SLML"
-      value: 4
-    - name: "Xylogics-IPX-SLIP"
-      value: 5
-    - name: "X.75-Synchronous"
-      value: 6
+    values:
+      - name: "PPP"
+        value: 1
+      - name: "SLIM"
+        value: 2
+      - name: "ARAP"
+        value: 3
+      - name: "Gandalf-SLML"
+        value: 4
+      - name: "Xylogics-IPX-SLIP"
+        value: 5
+      - name: "X.75-Synchronous"
+        value: 6
   framed-routing:
     type: integer
     values:
-    - name: "None"
-      value: 0
-    - name: "Broadcast"
-      value: 1
-    - name: "Listen"
-      value: 3
-    - name: "Broadcast-Listen"
-      value: 4
+      - name: "None"
+        value: 0
+      - name: "Broadcast"
+        value: 1
+      - name: "Listen"
+        value: 3
+      - name: "Broadcast-Listen"
+        value: 4
   login-service:
     type: integer
     values:
-    - name: "Telnet"
-      value: 0
-    - name: "Telnet"
-      value: 1
-    - name: "Telnet"
-      value: 2
-    - name: "Telnet"
-      value: 3
-    - name: "Telnet"
-      value: 4
-    - name: "Telnet"
-      value: 5
-    - name: "Telnet"
-      value: 6
-    - name: "Telnet"
-      value: 7
-    - name: "Telnet"
-      value: 8
+      - name: "Telnet"
+        value: 0
+      - name: "Telnet"
+        value: 1
+      - name: "Telnet"
+        value: 2
+      - name: "Telnet"
+        value: 3
+      - name: "Telnet"
+        value: 4
+      - name: "Telnet"
+        value: 5
+      - name: "Telnet"
+        value: 6
+      - name: "Telnet"
+        value: 7
+      - name: "Telnet"
+        value: 8
   login-tcp-port:
     type: integer
     values:
@@ -209,12 +209,12 @@ types:
       - name: "Rsh"
         value: 514
   termination-action:
-     type: integer
-     values:
-       - name: "Default"
-         value: 0
-       - name: "RADIUS-Request"
-         value: 1
+    type: integer
+    values:
+      - name: "Default"
+        value: 0
+      - name: "RADIUS-Request"
+        value: 1
   nas-port-type:
     type: integer
     values:
