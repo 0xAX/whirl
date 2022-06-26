@@ -1,0 +1,259 @@
+attributes:
+  - attribute: "User-Name"
+    id: 1
+    type: string
+  - attribute: "User-Password"
+    id: 2
+    type: string
+    flags:
+      encrypt: true
+  - attribute: "CHAP-Password"
+    id: 3
+    type: octets
+  - attribute: "NAS-IP-Address"
+    id: 4
+    type: ipv4
+  - attribute: "NAS-Port"
+    id: 5
+    type: nas-port-type
+  - attribute: "Service-Type"
+    id: 6
+    type: service-type
+  - attribute: "Framed-Protocol"
+    id: 7
+    type: framed-protocol
+  - attribute: "Framed-IP-Address"
+    id: 8
+    type: ipv4
+  - attribute: "Framed-IP-Netmask"
+    id: 9
+    type: ipv4
+  - attribute: "Framed-Routing"
+    id: 10
+    type: framed-routing
+  - attribute: "Filter-Id"
+    id: 11
+    type: string
+  - attribute: "Framed-MTU"
+    id: 12
+    type: integer
+  - attribute: "Framed-Compression"
+    id: 13
+    type: integer
+  - attribute: "Login-IP-Host"
+    id: 14
+    type: ipv4
+  - attribute: "Login-Service"
+    id: 15
+    type: login-service
+  - attribute: "Login-TCP-Port"
+    id: 16
+    type: login-tcp-port
+  - attribute: "Reply-Message"
+    id: 18
+    type: string
+  - attribute: "Callback-Number"
+    id: 19
+    type: string
+  - attribute: "Callback-Id"
+    id: 20
+    type: string
+  - attribute: "Framed-Route"
+    id: 22
+    type: string
+  - attribute: "Framed-IPX-Network"
+    id: 23
+    type: ipv4
+  - attribute: "State"
+    id: 24
+    type: octets
+  - attribute: "Class"
+    id: 25
+    type: octets
+  - attribute: "Vendor-Specific"
+    id: 26
+    type: vsa
+  - attribute: "Session-Timeout"
+    id: 27
+    type: integer
+  - attribute: "Idle-Timeout"
+    id: 28
+    type: integer
+  - attribute: "Termination-Action"
+    id: 29
+    type: termination-action
+  - attribute: "Called-Station-Id"
+    id: 30
+    type: string
+  - attribute: "Calling-Station-Id"
+    id: 31
+    type: string
+  - attribute: "NAS-Identifier"
+    id: 32
+    type: string
+  - attribute: "Proxy-State"
+    id: 33
+    type: octets
+  - attribute: "Login-LAT-Service"
+    id: 34
+    type: string
+  - attribute: "Login-LAT-Node"
+    id: 35
+    type: string
+  - attribute: "Login-LAT-Group"
+    id: 36
+    type: octets
+  - attribute: "Framed-AppleTalk-Link"
+    id: 37
+    type: integer
+  - attribute: "Framed-AppleTalk-Network"
+    id: 38
+    type: integer
+  - attribute: "Framed-AppleTalk-Zone"
+    id: 39
+    type: string
+  - attribute: "Framed-AppleTalk-Zone"
+    id: 60
+    type: octets
+  - attribute: "Framed-AppleTalk-Zone"
+    id: 61
+    type: integer
+  - attribute: "Framed-AppleTalk-Zone"
+    id: 62
+    type: integer
+  - attribute: "Framed-AppleTalk-Zone"
+    id: 63
+    type: string
+
+types:
+  service-type:
+    type: integer
+    values:
+      - name: "Login-User"
+        value: 1
+      - name: "Framed-User"
+        value: 2
+      - name: "Callback-Login-User"
+        value: 3
+      - name: "Callback-Framed-User"
+        value: 4
+      - name: "Outbound-User"
+        value: 5
+      - name: "Administrative-User"
+        value: 6
+      - name: "NAS-Prompt-User"
+        value: 7
+      - name: "Authenticate-Only"
+        value: 8
+      - name: "Callback-NAS-Prompt"
+        value: 9
+      - name: "Call-Check"
+        value: 10
+      - name: "Callback-Administrative"
+        value: 11
+  framed-protocol:
+    type: integer
+    values:    
+    - name: "PPP"
+      value: 1
+    - name: "SLIM"
+      value: 2
+    - name: "ARAP"
+      value: 3
+    - name: "Gandalf-SLML"
+      value: 4
+    - name: "Xylogics-IPX-SLIP"
+      value: 5
+    - name: "X.75-Synchronous"
+      value: 6
+  framed-routing:
+    type: integer
+    values:
+    - name: "None"
+      value: 0
+    - name: "Broadcast"
+      value: 1
+    - name: "Listen"
+      value: 3
+    - name: "Broadcast-Listen"
+      value: 4
+  login-service:
+    type: integer
+    values:
+    - name: "Telnet"
+      value: 0
+    - name: "Telnet"
+      value: 1
+    - name: "Telnet"
+      value: 2
+    - name: "Telnet"
+      value: 3
+    - name: "Telnet"
+      value: 4
+    - name: "Telnet"
+      value: 5
+    - name: "Telnet"
+      value: 6
+    - name: "Telnet"
+      value: 7
+    - name: "Telnet"
+      value: 8
+  login-tcp-port:
+    type: integer
+    values:
+      - name: "Telnet"
+        value: 23
+      - name: "Rlogin"
+        value: 513
+      - name: "Rsh"
+        value: 514
+  termination-action:
+     type: integer
+     values:
+       - name: "Default"
+         value: 0
+       - name: "RADIUS-Request"
+         value: 1
+  nas-port-type:
+    type: integer
+    values:
+      - name: "Async"
+        value: 0
+      - name: "Sync"
+        value: 1
+      - name: "ISDN"
+        value: 2
+      - name: "ISDN-V120"
+        value: 3
+      - name: "ISDN-V110"
+        value: 4
+      - name: "Virtual"
+        value: 5
+      - name: "PIAFS"
+        value: 6
+      - name: "HDLC-Clear-Channel"
+        value: 7
+      - name: "X.25"
+        value: 8
+      - name: "X.75"
+        value: 9
+      - name: "G.3-Fax"
+        value: 10
+      - name: "SDSL"
+        value: 11
+      - name: "ADSL-CAP"
+        value: 12
+      - name: "ADSL-DMT"
+        value: 13
+      - name: "IDSL"
+        value: 14
+      - name: "Ethernet"
+        value: 15
+      - name: "xDSL"
+        value: 16
+      - name: "Cable"
+        value: 17
+      - name: "Wireless-Other"
+        value: 18
+      - name: "Wireless-802.11"
+        value: 19

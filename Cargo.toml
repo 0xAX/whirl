@@ -1,0 +1,9 @@
+[package]
+name = "whirl"
+version = "0.0.1"
+edition = "2021"
+authors = ["Alexander Kuleshov <kuleshovmail@gmail.com>"]
+description = "Simple load testing tool"
+license = "Apache-2.0"
+
+[dependencies]

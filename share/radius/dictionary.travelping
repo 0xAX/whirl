@@ -1,0 +1,211 @@
+vendor: 18681
+attributes:
+  - attribute: "TP-Gateway-Version"
+    id: 1
+    type: string
+  - attribute: "TP-Firmware-Variant"
+    id: 2
+    type: string
+  - attribute: "TP-Firmware-Version"
+    id: 3
+    type: string
+  - attribute: "TP-Gateway-Config"
+    id: 4
+    type: string
+  - attribute: "TP-ENC-IV"
+    id: 5
+    type: string
+  - attribute: "TP-Password"
+    id: 6
+    type: string
+  - attribute: "TP-User-Agent"
+    id: 7
+    type: string
+  - attribute: "TP-Auth-Reply"
+    id: 8
+    type: integer
+  - attribute: "TP-Access-Class-Id"
+    id: 9
+    type: string
+  - attribute: "TP-Host-Name"
+    id: 10
+    type: string
+  - attribute: "TP-DHCP-Request-Option-List"
+    id: 11
+    type: string
+  - attribute: "TP-DHCP-Parameter-Request-List"
+    id: 12
+    type: string
+  - attribute: "TP-DHCP-Vendor-Class-Id"
+    id: 13
+    type: string
+  - attribute: "TP-DHCP-Client-Id"
+    id: 14
+    type: string
+  - attribute: "TP-Location-Id"
+    id: 15
+    type: string
+  - attribute: "TP-NAT-IP-Address"
+    id: 16
+    type: ipv4
+  - attribute: "TP-Zone-Id"
+    id: 17
+    type: string
+  - attribute: "TP-Monitor-Id"
+    id: 18
+    type: string
+  - attribute: "TP-Related-Session-Id"
+    id: 19
+    type: string
+  - attribute: "TP-Monitor-Session-Id"
+    id: 20
+    type: string
+  - attribute: "TP-Max-Input-Octets"
+    id: 21
+    type: integer64
+  - attribute: "TP-Max-Output-Octets"
+    id: 22
+    type: integer64
+  - attribute: "TP-Max-Total-Octets"
+    id: 23
+    type: integer64
+  - attribute: "TP-Exit-Access-Class-Id"
+    id: 24
+    type: string
+  - attribute: "TP-Access-Rule"
+    id: 25
+    type: string
+  - attribute: "TP-Access-Group"
+    id: 26
+    type: string
+  - attribute: "TP-NAT-Pool-Id"
+    id: 27
+    type: string
+  - attribute: "TP-NAT-Port-Start"
+    id: 28
+    type: integer
+  - attribute: "TP-NAT-Port-End"
+    id: 29
+    type: integer
+  - attribute: "TP-Keep-Alive-Timeout"
+    id: 30
+    type: integer
+  - attribute: "TP-TLS-Auth-Type"
+    id: 31
+    type: tp-tls-auth-type
+  - attribute: "TP-TLS-Pre-Shared-Key"
+    id: 32
+    type: string
+  - attribute: "TP-CAPWAP-Timestamp"
+    id: 33
+    type: integer
+  - attribute: "TP-CAPWAP-WTP-Version"
+    id: 34
+    type: string
+  - attribute: "TP-CAPWAP-Session-Id"
+    id: 35
+    type: octets
+  - attribute: "TP-CAPWAP-Radio-Id"
+    id: 36
+    type: integer
+  - attribute: "TP-CAPWAP-WWAN-Id"
+    id: 37
+    type: integer
+  - attribute: "TP-CAPWAP-WWAN-RAT"
+    id: 38
+    type: integer
+  - attribute: "TP-CAPWAP-WWAN-RSSi"
+    id: 39
+    type: integer
+  - attribute: "TP-CAPWAP-WWAN-CREG"
+    id: 40
+    type: integer
+  - attribute: "TP-CAPWAP-WWAN-LAC"
+    id: 41
+    type: integer
+  - attribute: "TP-CAPWAP-WWAN-Latency"
+    id: 42
+    type: integer
+  - attribute: "TP-CAPWAP-WWAN-MCC"
+    id: 43
+    type: integer
+  - attribute: "TP-CAPWAP-WWAN-MNC"
+    id: 44
+    type: integer
+  - attribute: "TP-CAPWAP-WWAN-Cell-Id"
+    id: 45
+    type: integer
+  - attribute: "TP-CAPWAP-Power-Save-Idle-Timeout"
+    id: 46
+    type: integer
+  - attribute: "TP-CAPWAP-Power-Save-Busy-Timeout"
+    id: 47
+    type: integer
+  - attribute: "TP-CAPWAP-SSID"
+    id: 48
+    type: string
+  - attribute: "TP-CAPWAP-Max-WIFI-Clients"
+    id: 49
+    type: integer
+  - attribute: "TP-CAPWAP-Walled-Garden"
+    id: 50
+    type: string
+  - attribute: "TP-CAPWAP-GPS-Latitude"
+    id: 51
+    type: string
+  - attribute: "TP-CAPWAP-GPS-Longitude"
+    id: 52
+    type: string
+  - attribute: "TP-CAPWAP-GPS-Altitude"
+    id: 53
+    type: string
+  - attribute: "TP-CAPWAP-GPS-Hdop"
+    id: 54
+    type: string
+  - attribute: "TP-CAPWAP-GPS-Timestamp"
+    id: 55
+    type: string
+  - attribute: "TP-CAPWAP-Hardware-Version"
+    id: 56
+    type: string
+  - attribute: "TP-CAPWAP-Software-Version"
+    id: 57
+    type: string
+  - attribute: "TP-CAPWAP-Boot-Version"
+    id: 58
+    type: string
+  - attribute: "TP-CAPWAP-Other-Software-Version"
+    id: 59
+    type: string
+  - attribute: "TP-Excess-Input-Octets"
+    id: 60
+    type: integer64
+  - attribute: "TP-Excess-Output-Octets"
+    id: 61
+    type: integer64
+  - attribute: "TP-Excess-Total-Octets"
+    id: 62
+    type: integer64
+  - attribute: "TP-Trace-Id"
+    id: 63
+    type: string
+types:
+  tp-tls-auth-type:
+    type: integer
+    values:
+      - name: "Pre-Shared-Key"
+        value: 0
+      - name: "X509-Subject-CommonName"
+        value: 1
+  framed-protocol:
+    type: integer
+    values:
+      - name: "TP-CAPWAP"
+        value: 0x48f90001
+  service-type:
+    type: integer
+    values:
+      - name: "TP-CAPWAP-WTP"
+        value: 0x48f90001
+      - name: "TP-CAPWAP-STA"
+        value: 0x48f90002
