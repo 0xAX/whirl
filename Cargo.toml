@@ -10,7 +10,7 @@ repository = "https://github.com/0xAX/whirl"
 readme = "README.md"
 edition = "2021"
 
-[bin]
+[[bin]]
 name = "whirl"
 
 [workspace]
