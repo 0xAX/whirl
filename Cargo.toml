@@ -20,3 +20,4 @@ members = [
 
 [dependencies]
 radius = { path = "crates/radius" }
+getopts = "0.2"
