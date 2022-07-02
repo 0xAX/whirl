@@ -1,3 +1,6 @@
+#
+# Travelping vendor RADIUS attributes
+#
 ---
 vendor: 18681
 attributes:

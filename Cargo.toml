@@ -4,7 +4,7 @@ version = "0.0.1-dev"
 authors = ["Alexander Kuleshov <kuleshovmail@gmail.com>"]
 license = "Apache-2.0"
 description = "Simple load testing tool"
-exclude = [".github/"]
+exclude = [".github/", "examples/"]
 keywords = ["cli", "load-testing", "performance"]
 repository = "https://github.com/0xAX/whirl"
 readme = "README.md"
@@ -15,9 +15,21 @@ name = "whirl"
 
 [workspace]
 members = [
-    "crates/radius"
+    "crates/radius",
+    "crates/libwl"
 ]
 
 [dependencies]
-radius = { path = "crates/radius" }
-getopts = "0.2"
+radius = { path = "crates/radius", version = "0.0.1" }
+libwl = { path = "crates/libwl", version = "0.0.1" }
+getopts = { version = "0.2" }
+
+[profile.dev]
+debug = true
+
+[profile.test]
+debug = true
+
+[profile.release]
+lto = true
+opt-level = 2

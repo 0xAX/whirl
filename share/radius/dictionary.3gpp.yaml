@@ -1,0 +1,162 @@
+# 3GPP RADIUS attributes from TS29.061
+#
+# 3GPP RADIUS dictionaries from TS29.061
+#
+# For more information see:
+# https://www.3gpp.org/ftp/Specs/2022-06/Rel-14/29_series/29061-e40.zip
+#
+---
+vendor: 10415
+attributes:
+  - attribute: "3GPP-IMSI"
+    id: 1
+    type: string
+  - attribute: "3GPP-Charging-Id"
+    id: 2
+    type: integer
+  - attribute: "3GPP-PDP-Type"
+    id: 3
+    type: pdp-type
+  - attribute: "3GPP-CG-Address"
+    id: 4
+    type: ipv4
+  - attribute: "3GPP-GPRS-Negotiated-QoS-Profile"
+    id: 5
+    type: string
+  - attribute: "3GPP-SGSN-Address"
+    id: 6
+    type: ipv4
+  - attribute: "3GPP-GGSN-Address"
+    id: 7
+    type: ipv4
+  - attribute: "3GPP-IMSI-MCC-MNC"
+    id: 8
+    type: string
+  - attribute: "3GPP-GGSN- MCC-MNC"
+    id: 9
+    type: string
+  - attribute: "3GPP-NSAPI"
+    id: 10
+    type: string
+  - attribute: "3GPP-Session-Stop-Indicator"
+    id: 11
+    type: session-stop-indicator
+  - attribute: "3GPP-Selection-Mode"
+    id: 12
+    type: string
+  - attribute: "3GPP-Charging-Characteristics"
+    id: 13
+    type: string
+  - attribute: "3GPP-CG-Ipv6-Address"
+    id: 14
+    type: ivp6
+  - attribute: "3GPP-SGSN-Ipv6-Address"
+    id: 15
+    type: ipv6
+  - attribute: "3GPP-GGSN-Ipv6-Address"
+    id: 16
+    type: ipv6
+  - attribute: "3GPP-Ipv6-DNS-Servers"
+    id: 17
+    type: array ipv6
+  - attribute: "3GPP-SGSN-MCC-MNC"
+    id: 18
+    type: string
+  - attribute: "3GPP-Teardown-Indicator"
+    id: 19
+    type: teardown-indicator
+  - attribute: "3GPP-IMEISV"
+    id: 20
+    type: string
+  - attribute: "3GPP-RAT-Type"
+    id: 21
+    type: rat-type
+  - attribute: "3GPP-User-Location-Info"
+    id: 22
+    type: string
+  - attribute: "3GPP-MS-TimeZone"
+    id: 23
+    type: string
+  - attribute: "3GPP-CAMEL-Charging-Info"
+    id: 24
+    type: octets
+  - attribute: "3GPP-Packet-Filter"
+    id: 25
+    type: string
+  - attribute: "3GPP-Negotiated-DSCP"
+    id: 26
+    type: byte
+  - attribute: "3GPP-Allocate-IP-Type"
+    id: allocate-ip-type
+    type: string
+  - attribute: "External-Identifier"
+    id: 28
+    type: octets
+  - attribute: "TWAN-Identifier"
+    id: 29
+    type: octets
+  - attribute: "3GPP-User-Location-Info-Time"
+    id: 30
+    type: string
+types:
+  pdp-type:
+    type: integer
+    values:
+      - name: "IPv4"
+        value: 0
+      - name: "PPP"
+        value: 1
+      - name: "IPv6"
+        value: 2
+      - name: "IPv4v6"
+        value: 3
+      - name: "Non-IP"
+        value: 4
+      - name: "Unstructured"
+        value: 5
+      - name: "Ethernet"
+        value: 6
+  session-stop-indicator:
+    type: byte
+    values:
+      - name: "Stop"
+        value: 255
+  teardown-indicator:
+    type: byte
+    values:
+      - name: "This-IP-CAN"
+        value: 0
+      - name: "All-IP-CAN"
+        value: 1
+  rat-type:
+    type: byte
+    values:
+      - name: "UTRAN"
+        value: 1
+      - name: "GERAN"
+        value: 2
+      - name: "WLAN"
+        value: 3
+      - name: "GAN"
+        value: 4
+      - name: "HSPA-Evolution"
+        value: 5
+      - name: "EUTRAN"
+        value: 6
+      - name: "Virtual"
+        value: 7
+      - name: "EUTRAN-NB-IoT"
+        value: 8
+      - name: "LTE-M"
+        value: 9
+  allocate-ip-type:
+    type: byte
+    values:
+      - name: "Do-Not-Allocate"
+        value: 1
+      - name: "Allocate-IPv4-Address"
+        value: 2
+      - name: "Allocate-IPv6-Prefix"
+        value: 3
+      - name: "Allocate-IPv4-and-IPv6"
+        value: 4

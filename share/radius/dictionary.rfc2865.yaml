@@ -1,3 +1,9 @@
+#
+# RADIUS attributes from RFC 28605
+#
+# For more information see:
+# https://datatracker.ietf.org/doc/html/rfc2865
+#
 ---
 attributes:
   - attribute: "User-Name"
@@ -125,7 +131,6 @@ attributes:
   - attribute: "Framed-AppleTalk-Zone"
     id: 63
     type: string
-
 types:
   service-type:
     type: integer

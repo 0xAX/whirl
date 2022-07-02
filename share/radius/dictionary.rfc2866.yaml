@@ -1,0 +1,110 @@
+#
+# RADIUS attributes from RFC 2866
+#
+# For more information see:
+# https://datatracker.ietf.org/doc/html/rfc2866
+#
+---
+attributes:
+  - attribute: "Acct-Status-Type"
+    id: 40
+    type: acct-status-type
+  - attribute: "Acct-Delay-Time"
+    id: 41
+    type: integer
+  - attribute: "Acct-Input-Octets"
+    id: 42
+    type: integer
+  - attribute: "Acct-Output-Octets"
+    id: 43
+    type: integer
+  - attribute: "Acct-Session-Id"
+    id: 44
+    type: string
+  - attribute: "Acct-Authentic"
+    id: 45
+    type: acct-authentic
+  - attribute: "Acct-Session-Time"
+    id: 46
+    type: integer
+  - attribute: "Acct-Input-Packets"
+    id: 47
+    type: integer
+  - attribute: "Acct-Output-Packets"
+    id: 48
+    type: integer
+  - attribute: "Acct-Terminate-Cause"
+    id: 49
+    type: acct-terminate-cause
+  - attribute: "Acct-Multi-Session-Id"
+    id: 50
+    type: string
+  - attribute: "Acct-Link-Count"
+    id: 51
+    type: integer
+types:
+  acct-status-type:
+    type: integer
+    values:
+      - name: "Start"
+        value: 1
+      - name: "Stop"
+        value: 2
+      - name: "Interim-Update"
+        value: 3
+      - name: "Accounting-On"
+        value: 7
+      - name: "Accounting-Off"
+        value: 8
+      - name: "Reserved for Failed"
+        value: 15
+  acct-authentic-type:
+    type: integer
+    values:
+      - name: "RADIUS"
+        value: 1
+      - name: "Local"
+        value: 2
+      - name: "Remote"
+        value: 3
+      - name: "Diameter"
+        value: 4        
+  acct-terminate-causes:
+    type: integer
+    values:
+      - name: "User-Request"
+        value: 1
+      - name: "Lost-Carrier"
+        value: 2
+      - name: "Lost-Service"
+        value: 3
+      - name: "Idle-Timeout"
+        value: 4
+      - name: "Session-Timeout"
+        value: 5
+      - name: "Admin-Reset"
+        value: 6
+      - name: "Admin-Reboot"
+        value: 7
+      - name: "Port-Error"
+        value: 8
+      - name: "NAS-Error"
+        value: 9
+      - name: "NAS-Request"
+        value: 10
+      - name: "NAS-Reboot"
+        value: 11
+      - name: "Port-Unneeded"
+        value: 12
+      - name: "Port-Preempted"
+        value: 13
+      - name: "Port-Suspended"
+        value: 14
+      - name: "Service-Unavailable"
+        value: 15
+      - name: "Callback"
+        value: 16
+      - name: "User-Error"
+        value: 17
+      - name: "Host-Request"
+        value: 18

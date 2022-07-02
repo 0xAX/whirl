@@ -1,8 +1,12 @@
-use std::env;
-use std::process;
-use std::path::{Path};
+extern crate libwl;
+extern crate radius;
 
-use getopts::{HasArg, Options, Occur};
+use std::env;
+use std::fs::File;
+use std::io::Read;
+use std::process;
+
+use getopts::{HasArg, Occur, Options};
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
@@ -16,15 +20,19 @@ fn main() {
 
     let mut opts = Options::new();
 
-    opts.opt("s", "script", "path to the script with a scenario", "SCRIPT",
-             HasArg::Yes, Occur::Optional);
+    opts.opt(
+        "s",
+        "script",
+        "path to the script with a scenario",
+        "SCRIPT",
+        HasArg::Yes,
+        Occur::Optional,
+    );
     opts.optflag("h", "help", "display this help text and exit");
     opts.optflag("v", "version", "display version of whirl");
 
     let matches = match opts.parse(&argv[1..]) {
-        Ok(m) => {
-            m
-        },
+        Ok(m) => m,
         Err(f) => {
             eprintln!("Error: {0}", f.to_string());
             process::exit(1);
@@ -42,15 +50,18 @@ fn main() {
     }
 
     let script = matches.opt_str("s");
-    let _scenario = match script {
-        None => {
-            print_usage(opts);
-            process::exit(1);
-        },
-        Some(file) => {
-            Path::new(&file);
-        }
-    };
+    if script == None {
+        print_usage(opts);
+        process::exit(1);
+    }
+
+    let mut script_file = File::open(script.unwrap()).expect("TEST");
+    let mut script = String::new();
+    script_file
+        .read_to_string(&mut script)
+        .expect("could not read lua script");
+
+    libwl::load(script.as_ref());
 
     process::exit(0);
 }
