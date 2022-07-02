@@ -1,7 +1,7 @@
 name: RADIUS dicitonaries validation
 on:
   push:
-    branches: [ diameter-dictionaries-lint ]
+    branches: [ master ]
   pull_request:
     branches:
       - master
