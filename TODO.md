@@ -2,6 +2,7 @@
 
 ## Building and testing
 
+  * Add CI job for `cargo test`
   * For now libwl is linked with luajit-5.1 and it's path is kind of hard-coded
   * Add cargo fmt
   * Add clippy
