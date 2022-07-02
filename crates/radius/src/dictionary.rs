@@ -3,7 +3,7 @@
 
 use std::path::Path;
 
-use super::error::{RadiusError};
+use super::error::RadiusError;
 
 #[allow(dead_code)]
 const RADIUS_DICTIONARIES_DIR: &'static str = "/usr/share/radius";
