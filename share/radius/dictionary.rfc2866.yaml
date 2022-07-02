@@ -68,7 +68,7 @@ types:
       - name: "Remote"
         value: 3
       - name: "Diameter"
-        value: 4        
+        value: 4
   acct-terminate-causes:
     type: integer
     values:
