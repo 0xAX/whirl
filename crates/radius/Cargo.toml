@@ -11,3 +11,4 @@ edition = "2021"
 
 [dependencies]
 yaml-rust = "0.4.5"
+walkdir = "2.3.2"
