@@ -6,6 +6,8 @@
   * For now libwl is linked with luajit-5.1 and it's path is kind of hard-coded
   * Add cargo fmt
   * Add clippy
+  * whirl could be launched via `cargo run` without any issues but could be issues
+with linking of libwl if we will run it as binary.
 
 ## Documentation
 
