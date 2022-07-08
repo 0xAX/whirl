@@ -5,6 +5,12 @@ use std::env;
 use std::fs::File;
 use std::io::Read;
 use std::process;
+use std::path::{PathBuf};
+
+use radius::dictionary::{
+    load_dictionaries,
+    DictionarySet
+};
 
 use getopts::{HasArg, Occur, Options};
 
@@ -20,6 +26,14 @@ fn main() {
 
     let mut opts = Options::new();
 
+    opts.opt(
+        "d",
+        "dictionaries",
+        "path to the directory with RADIUS dictionaries",
+        "DIR",
+        HasArg::Yes,
+        Occur::Optional,
+    );
     opts.opt(
         "s",
         "script",
@@ -48,19 +62,35 @@ fn main() {
         println!("whirl - {0}", VERSION);
         process::exit(0);
     }
-
+    
     let script = matches.opt_str("s");
     if script == None {
         print_usage(opts);
         process::exit(1);
     }
 
+    // read the scenario script
     let mut script_file = File::open(script.unwrap()).expect("TEST");
     let mut script = String::new();
     script_file
         .read_to_string(&mut script)
         .expect("could not read lua script");
 
+    // load radius dictionaries
+    let dicts_dir = matches.opt_str("d").and_then(|dir| {
+        let mut p = PathBuf::new();
+        p.push(dir);
+        Some(p)
+    });
+    match load_dictionaries(DictionarySet::All, dicts_dir) {
+        Ok(_) => { }
+        Err(err) => {
+            eprintln!("Error: Can't load RADIUS dictionaries - {:?}", err);
+            process::exit(1);
+        }
+    }
+
+    // load scripts and start execution
     libwl::load(script.as_ref());
 
     process::exit(0);
