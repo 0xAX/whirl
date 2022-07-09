@@ -1,20 +1,25 @@
-//! Defines the types and auxilary functions to load RADIUS dictionaries
-//! and access them.
+/// Defines the types and auxilary functions to load RADIUS dictionaries.
 
+use std::collections::HashMap;
 use std::env;
 use std::ffi::OsString;
 use std::fs::File;
 use std::io::Read;
 use std::path::{Path, PathBuf};
 
+use super::attribute::{Attribute, Vendor};
 use super::error::RadiusError;
 
 use walkdir::WalkDir;
+use yaml_rust::yaml::Yaml;
 use yaml_rust::YamlLoader;
 
-#[allow(dead_code)]
+// The path where the whirl RADIUS dictionaries should be installed
+// after cargo install.
 const RADIUS_DICTIONARIES_DIR: &'static str = "/usr/share/radius";
 
+// The environment variable that could point to the directory where
+// whirl RADIUS dictionaries are located.
 const ENV_RADIUS_DICTIONARIES_DIR: &'static str = "RADIUS_DICTIONARIES_DIR";
 
 /// Set RADIUS of dictionaries to load.
@@ -35,7 +40,14 @@ pub enum DictionarySet {
 ///     variable will be checked.
 ///   * `/usr/share/radius` directory will be used if both previous souces
 ///     are not set.
-pub fn load_dictionaries(_set: DictionarySet, path: Option<PathBuf>) -> Result<(), RadiusError> {
+///
+/// If loading of RADIUS dictionaries will be succesfully executed the
+/// hashmap with mapping of RADIUS attribute names to `radius::Attribute`
+/// will be returned. Otherwise one of `RadiusError` value.
+pub fn load_dictionaries(
+    _set: DictionarySet,
+    path: Option<PathBuf>,
+) -> Result<HashMap<String, Attribute>, RadiusError> {
     let dicts_dir = dictionaries_path(path);
 
     if !dicts_dir.exists() {
@@ -45,6 +57,8 @@ pub fn load_dictionaries(_set: DictionarySet, path: Option<PathBuf>) -> Result<(
     if !dicts_dir.is_dir() {
         return Err(RadiusError::InvalidDictionaryDir(dicts_dir));
     }
+
+    let mut hash = HashMap::new();
 
     for entry in WalkDir::new(dicts_dir).into_iter().filter_map(|e| e.ok()) {
         let dictionary: &Path = entry.path();
@@ -70,16 +84,62 @@ pub fn load_dictionaries(_set: DictionarySet, path: Option<PathBuf>) -> Result<(
             match yaml {
                 Ok(_) => {}
                 Err(err) => {
-                    return Err(RadiusError::IvalidDictionaryYaml(
-                        err,
-                        dictionary.to_owned(),
-                    ));
+                    return Err(RadiusError::InvalidYaml(err, dictionary.to_owned()));
                 }
             };
+
+            // start to build RADIUS attributes map
+            let document: &Yaml = &yaml.unwrap()[0];
+            let vendor = &document["vendor"];
+            let attributes: &Vec<Yaml> = &document["attributes"].as_vec().unwrap();
+
+            // Go through the RADIUS attributes within yaml document
+            for attribute in attributes {
+                // read attribute name
+                let key = match &attribute["attribute"] {
+                    Yaml::String(value) => value,
+                    _ => {
+                        return Err(RadiusError::DictionaryMissedAttrKey(dictionary.to_owned()));
+                    }
+                };
+
+                // read attribute id
+                let id = match &attribute["id"] {
+                    Yaml::Integer(value) => value,
+                    _ => {
+                        return Err(RadiusError::DictionaryMissedAttrId(
+                            dictionary.to_owned(),
+                            key.to_string(),
+                        ));
+                    }
+                };
+
+                // read possible vendor id
+                let v = match vendor {
+                    Yaml::BadValue => None,
+                    Yaml::Integer(vnd) => Some(Vendor::new(vnd.clone() as u32, id.clone() as u8)),
+                    _ => {
+                        return Err(RadiusError::DictionaryIvalidVendorId(dictionary.to_owned()));
+                    }
+                };
+
+                // According to RFC 2865 5.26:
+                //
+                // Type
+                //       26 for Vendor-Specific.
+                let attr_id = match v {
+                    None => id.clone() as u8,
+                    Some(_) => 26,
+                };
+
+                // insert new attribute into hash
+                let new_attr = Attribute::new(attr_id, v);
+                hash.insert(key.to_string(), new_attr);
+            }
         }
     }
 
-    Ok(())
+    Ok(hash)
 }
 
 fn dictionaries_path(path: Option<PathBuf>) -> PathBuf {
