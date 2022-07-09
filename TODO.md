@@ -28,3 +28,8 @@ for more information see TS29.061
 
   * Implement `libwl.radius_send` API
   * Implement `libwl.stop_with_error()` API
+
+
+## whirl
+
+  * add ability to pass list of RADIUS dictionaries
