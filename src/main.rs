@@ -4,13 +4,10 @@ extern crate radius;
 use std::env;
 use std::fs::File;
 use std::io::Read;
+use std::path::PathBuf;
 use std::process;
-use std::path::{PathBuf};
 
-use radius::dictionary::{
-    load_dictionaries,
-    DictionarySet
-};
+use radius::dictionary::{load_dictionaries, DictionarySet};
 
 use getopts::{HasArg, Occur, Options};
 
@@ -62,19 +59,26 @@ fn main() {
         println!("whirl - {0}", VERSION);
         process::exit(0);
     }
-    
+
     let script = matches.opt_str("s");
     if script == None {
         print_usage(opts);
         process::exit(1);
     }
 
+    // open the scenario script
+    let script_file = File::open(script.unwrap());
+    match script_file {
+        Ok(_) => {}
+        Err(err) => {
+            eprintln!("Error: Can't load script with scenario - {:?}", err);
+            process::exit(1);
+        }
+    }
+
     // read the scenario script
-    let mut script_file = File::open(script.unwrap()).expect("TEST");
     let mut script = String::new();
-    script_file
-        .read_to_string(&mut script)
-        .expect("could not read lua script");
+    script_file.unwrap().read_to_string(&mut script).unwrap();
 
     // load radius dictionaries
     let dicts_dir = matches.opt_str("d").and_then(|dir| {
@@ -83,7 +87,7 @@ fn main() {
         Some(p)
     });
     match load_dictionaries(DictionarySet::All, dicts_dir) {
-        Ok(_) => { }
+        Ok(_) => {}
         Err(err) => {
             eprintln!("Error: Can't load RADIUS dictionaries - {:?}", err);
             process::exit(1);
