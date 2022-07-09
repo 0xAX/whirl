@@ -87,8 +87,8 @@ attributes:
     id: 26
     type: byte
   - attribute: "3GPP-Allocate-IP-Type"
-    id: allocate-ip-type
-    type: string
+    id: 27
+    type: allocate-ip-type
   - attribute: "External-Identifier"
     id: 28
     type: octets
