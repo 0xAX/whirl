@@ -16,6 +16,9 @@ with linking of libwl if we will run it as binary.
 
 ## radius
 
+  * Add valiadtion of RADIUS attributes according to the given types within schema
+  * If `vendor` is not set to `None` - check that attribute id is `26` according
+to the RFC 2865 (see Vendor-Specific).
   * add support for structured attrbiutes:
 
     * `3GPP-User-Location-Info`
