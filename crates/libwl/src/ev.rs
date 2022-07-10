@@ -1,6 +1,6 @@
 use super::conf::Config;
 use super::LUA_SCOPE;
-use mlua::{Table, Function};
+use mlua::{Function, Table};
 use std::thread;
 use std::time;
 
