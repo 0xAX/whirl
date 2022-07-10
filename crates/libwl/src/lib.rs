@@ -1,11 +1,23 @@
+pub mod conf;
+pub mod ev;
 pub mod radius;
 
+use conf::{Config, ConfigError};
+use lazy_static::lazy_static;
+use mlua::prelude::*;
 use std::env;
 use std::path::PathBuf;
+use std::sync::Mutex;
 
-use mlua::prelude::*;
+// Global LUA context.
+lazy_static! {
+    pub static ref LUA_SCOPE: Mutex<mlua::Lua> = {
+        let lua = unsafe { Lua::unsafe_new() };
+        Mutex::new(lua)
+    };
+}
 
-pub fn load(script: &str) -> () {
+pub fn load(script: &str) -> Result<Config, ConfigError> {
     let (dylib_path, dylib_ext, separator);
 
     dylib_path = env::var("LD_LIBRARY_PATH").unwrap();
@@ -23,13 +35,26 @@ pub fn load(script: &str) -> () {
         .collect::<Vec<_>>()
         .join(";");
 
-    let lua = unsafe { Lua::unsafe_new() };
-    lua.load(&format!("package.cpath = \"{}\"", cpath))
+    let _ = LUA_SCOPE
+        .lock()
+        .unwrap()
+        .load(&format!("package.cpath = \"{}\"", cpath))
         .exec()
         .unwrap();
-    lua.load(script).exec().unwrap();
 
-    ()
+    let _ = LUA_SCOPE.lock().unwrap().load(script).exec().unwrap();
+    // load scenario script
+    // let lua = unsafe { Lua::unsafe_new().into_static() };
+    // let _ = lua
+    //     .load(&format!("package.cpath = \"{}\"", cpath))
+    //     .exec()
+    //     .unwrap();
+    // let _ = lua.load(script).exec().unwrap();
+
+    // // Try to load configuration from the scenario file
+    let config = conf::Config::new();
+
+    config
 }
 
 #[mlua::lua_module]

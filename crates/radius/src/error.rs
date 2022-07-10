@@ -1,6 +1,5 @@
 /// Defines the types and auxilary functions to represent and work with
 /// RADIUS errors.
-
 use std::path::PathBuf;
 
 use yaml_rust::scanner::ScanError;

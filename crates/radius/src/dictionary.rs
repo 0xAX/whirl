@@ -1,5 +1,4 @@
 /// Defines the types and auxilary functions to load RADIUS dictionaries.
-
 use std::collections::HashMap;
 use std::env;
 use std::ffi::OsString;

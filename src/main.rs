@@ -20,7 +20,6 @@ fn print_usage(opts: Options) {
 
 fn main() {
     let argv: Vec<String> = env::args().collect();
-
     let mut opts = Options::new();
 
     opts.opt(
@@ -95,7 +94,10 @@ fn main() {
     }
 
     // load scripts and start execution
-    libwl::load(script.as_ref());
+    let config = libwl::load(script.as_ref()).unwrap();
+
+    // run main event loop
+    libwl::ev::run(&config);
 
     process::exit(0);
 }

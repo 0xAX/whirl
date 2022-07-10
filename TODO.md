@@ -31,8 +31,11 @@ for more information see TS29.061
 
   * Implement `libwl.radius_send` API
   * Implement `libwl.stop_with_error()` API
-
+  * Condier to use [new_with](https://docs.rs/mlua/0.5.0/mlua/struct.Lua.html#method.new_with)
+for sandboxing
 
 ## whirl
 
-  * add ability to pass list of RADIUS dictionaries
+  * Add ability to pass list of RADIUS dictionaries
+  * Check that scenario script was loaded without any errors
+  * Check that config was parsed properly
