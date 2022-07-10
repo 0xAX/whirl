@@ -19,7 +19,6 @@ lazy_static! {
 
 pub fn load(script: &str) -> Result<Config, ConfigError> {
     let (dylib_path, dylib_ext, separator);
-
     dylib_path = env::var("LD_LIBRARY_PATH").unwrap();
     dylib_ext = "so";
     separator = ":";
@@ -35,6 +34,7 @@ pub fn load(script: &str) -> Result<Config, ConfigError> {
         .collect::<Vec<_>>()
         .join(";");
 
+    // load whirl modules
     let _ = LUA_SCOPE
         .lock()
         .unwrap()
@@ -42,16 +42,10 @@ pub fn load(script: &str) -> Result<Config, ConfigError> {
         .exec()
         .unwrap();
 
+    // load the scenario script
     let _ = LUA_SCOPE.lock().unwrap().load(script).exec().unwrap();
-    // load scenario script
-    // let lua = unsafe { Lua::unsafe_new().into_static() };
-    // let _ = lua
-    //     .load(&format!("package.cpath = \"{}\"", cpath))
-    //     .exec()
-    //     .unwrap();
-    // let _ = lua.load(script).exec().unwrap();
 
-    // // Try to load configuration from the scenario file
+    // Try to load configuration from the scenario file
     let config = conf::Config::new();
 
     config
