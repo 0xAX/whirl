@@ -25,8 +25,16 @@ fn main() {
     opts.opt(
         "d",
         "dictionaries",
-        "path to the directory with RADIUS dictionaries",
+        "path to the directory with RADIUS and Diameter dictionaries",
         "DIR",
+        HasArg::Yes,
+        Occur::Optional,
+    );
+    opts.opt(
+        "e",
+        "engine",
+        "I/O engine",
+        "ENGINE",
         HasArg::Yes,
         Occur::Optional,
     );
@@ -35,6 +43,14 @@ fn main() {
         "script",
         "path to the script with a scenario",
         "SCRIPT",
+        HasArg::Yes,
+        Occur::Optional,
+    );
+    opts.opt(
+        "t",
+        "threads",
+        "number of threads to use",
+        "THREADS",
         HasArg::Yes,
         Occur::Optional,
     );
@@ -59,13 +75,39 @@ fn main() {
         process::exit(0);
     }
 
+    let mut io_engine = libwl::ev::IOEngine::WIO;
+    let engine = matches.opt_str("e");
+    match engine {
+        None => {}
+        Some(e) => {
+            if e == "wio" {
+                io_engine = libwl::ev::IOEngine::WIO;
+            }
+
+            if e == "tokio" {
+                io_engine = libwl::ev::IOEngine::Tokio;
+            }
+        }
+    }
+
+    let mut threads = matches.opt_str("t");
+    if threads == None {
+        threads = Some("4".to_string());
+    }
+    let threads = match threads.unwrap().parse::<u8>() {
+        Ok(t) => t,
+        Err(_e) => {
+            eprintln!("Error: -t/--threads should have numeric value");
+            process::exit(1);
+        }
+    };
+
     let script = matches.opt_str("s");
     if script == None {
         print_usage(opts);
         process::exit(1);
     }
 
-    // open the scenario script
     let script_file = File::open(script.unwrap());
     match script_file {
         Ok(_) => {}
@@ -75,11 +117,9 @@ fn main() {
         }
     }
 
-    // read the scenario script
     let mut script = String::new();
     script_file.unwrap().read_to_string(&mut script).unwrap();
 
-    // load radius dictionaries
     let dicts_dir = matches.opt_str("d").and_then(|dir| {
         let mut p = PathBuf::new();
         p.push(dir);
@@ -93,11 +133,14 @@ fn main() {
         }
     }
 
-    // load scripts and start execution
-    let config = libwl::load(script.as_ref()).unwrap();
+    // load the scenario script, build event loop configuration
+    // and start execution
+    let sceneario = libwl::load(script.as_ref()).unwrap();
+    let mut ev = libwl::ev::Ev::new();
 
-    // run main event loop
-    libwl::ev::run(&config);
+    ev.set_threads(threads)
+        .set_io_engine(io_engine)
+        .run(&sceneario);
 
     process::exit(0);
 }

@@ -26,6 +26,8 @@ to the RFC 2865 (see Vendor-Specific).
     * `Packet-Filter`
 
 for more information see TS29.061
+  * md5 - consider simd implemenetation
+  * md5 - maybe we can find replacement for `put_u64_le` in stdlib
 
 ## Lua API
 
