@@ -1,7 +1,7 @@
 use super::conf::Config;
 use mlua::{Table};
-use std::thread;
-use std::time;
+use num_bigint::BigInt;
+use std::str::FromStr;
 
 #[derive(Debug)]
 pub enum IOEngine {
@@ -33,22 +33,29 @@ impl Ev {
         self
     }
 
-    pub fn run(&mut self, _config: &Config) -> () {
-        thread::spawn(move || {
-            let l = super::LUA_SCOPE.lock().unwrap();
-            let g = l.globals();
-            let workload = g.get::<_, Table>("workload").unwrap();
-            println!("{:?}", workload.contains_key::<_>("imsi_range").unwrap());
-        });
+    #[tokio::main]
+    pub async fn run(&mut self, _config: &Config) -> () {
+        let l = super::LUA_SCOPE.lock().unwrap();
+        let g = l.globals();
 
-        thread::spawn(move || {
-            let l = super::LUA_SCOPE.lock().unwrap();
-            let g = l.globals();
-            let workload = g.get::<_, Table>("workload").unwrap();
-            println!("{:?}", workload.contains_key::<_>("imsi_range").unwrap());
-        });
+        let workload = g.get::<_, Table>("workload").unwrap();
+        let imsi_range: String = workload.get::<_, String>("imsi_range").unwrap();
+        let imsis = imsi_range.split('-').collect::<Vec<&str>>();
+        let mut imsi_start = BigInt::from_str(imsis[0]).unwrap();
+        let imsi_end = BigInt::from_str(imsis[1]).unwrap();
 
-        let ten_millis = time::Duration::from_millis(1000);
-        thread::sleep(ten_millis);
+
+        loop {
+            if imsi_start == imsi_end {
+                break;
+            }
+            imsi_start += 1;
+
+            let imsi = imsi_start.clone();
+
+            tokio::spawn(async move {
+                println!("{:?}", &imsi);
+            });
+        }
     }
 }

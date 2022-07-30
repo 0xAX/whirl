@@ -42,3 +42,7 @@ for sandboxing
   * Add ability to pass list of RADIUS dictionaries
   * Check that scenario script was loaded without any errors
   * Check that config was parsed properly
+
+## I/O
+
+  * Check that given `imsi_range` is correct in the Ev::run()
