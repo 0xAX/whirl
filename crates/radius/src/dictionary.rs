@@ -1,11 +1,11 @@
 /// Defines the types and auxilary functions to load RADIUS dictionaries.
-use std::collections::HashMap;
 use std::env;
 use std::ffi::OsString;
 use std::fs::File;
 use std::io::Read;
 use std::path::{Path, PathBuf};
 
+//use super::RADIUS_DICTIONARIES;
 use super::attribute::{Attribute, Vendor};
 use super::error::RadiusError;
 
@@ -46,7 +46,7 @@ pub enum DictionarySet {
 pub fn load_dictionaries(
     _set: DictionarySet,
     path: Option<PathBuf>,
-) -> Result<HashMap<String, Attribute>, RadiusError> {
+) -> Result<(), RadiusError> {
     let dicts_dir = dictionaries_path(path);
 
     if !dicts_dir.exists() {
@@ -56,8 +56,6 @@ pub fn load_dictionaries(
     if !dicts_dir.is_dir() {
         return Err(RadiusError::InvalidDictionaryDir(dicts_dir));
     }
-
-    let mut hash = HashMap::new();
 
     for entry in WalkDir::new(dicts_dir).into_iter().filter_map(|e| e.ok()) {
         let dictionary: &Path = entry.path();
@@ -133,12 +131,12 @@ pub fn load_dictionaries(
 
                 // insert new attribute into hash
                 let new_attr = Attribute::new(attr_id, v);
-                hash.insert(key.to_string(), new_attr);
+                super::RADIUS_DICTIONARIES.lock().unwrap().insert(key.to_string(), new_attr);
             }
         }
     }
 
-    Ok(hash)
+    Ok(())
 }
 
 fn dictionaries_path(path: Option<PathBuf>) -> PathBuf {

@@ -11,3 +11,4 @@ lazy_static = { version = "1.4.0" }
 tokio = { version = "1.20.1", features = ["full"] }
 num-bigint = { version = "0.4.3" }
 mlua = { version = "0.8.0", default-features = false, features = ["luajit", "module", "send", "async"] }
+radius = { path = "../radius", version = "0.0.1" }

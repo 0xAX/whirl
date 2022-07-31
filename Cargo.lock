@@ -115,6 +115,7 @@ dependencies = [
  "lazy_static",
  "mlua",
  "num-bigint",
+ "radius",
  "tokio",
 ]
 
@@ -299,6 +300,7 @@ dependencies = [
 name = "radius"
 version = "0.0.1"
 dependencies = [
+ "lazy_static",
  "walkdir",
  "yaml-rust",
 ]

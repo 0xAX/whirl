@@ -125,13 +125,13 @@ fn main() {
         p.push(dir);
         Some(p)
     });
-    match load_dictionaries(DictionarySet::All, dicts_dir) {
-        Ok(_) => {}
+    let radius_dictionaries = match load_dictionaries(DictionarySet::All, dicts_dir) {
+        Ok(d) => { d }
         Err(err) => {
             eprintln!("Error: Can't load RADIUS dictionaries - {:?}", err);
             process::exit(1);
         }
-    }
+    };
 
     // load the scenario script, build event loop configuration
     // and start execution

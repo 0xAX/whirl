@@ -25,7 +25,7 @@ workload = {
       auth = '127.0.0.1:1812',
       acct = '127.0.0.1:1813'
    },
-   imsi_range = '262019876543210-262019876543310'
+   imsi_range = '262019876543200-262019876543201'
 }
 
 -- Entry point
@@ -34,19 +34,19 @@ function run(state)
    state = radius_auth(state)
 
    -- Send RADIUS Access-Request packet
-   state = libwl.radius_send(workload['radius_servers']['auth'], state['packet'], 'secret')
+   state = radius_send(workload['radius_servers']['auth'], state['packet'], 'secret')
 
-   -- Build RADIUS Accounting-Start packet
-   state = radius_acct_start(state)
+   -- -- Build RADIUS Accounting-Start packet
+   -- state = radius_acct_start(state)
 
-   -- Send RADIUS Accounting-Request Start packet
-   state = libwl.radius_send(workload['radius_servers']['acct'], state['packet'], 'secret')
+   -- -- Send RADIUS Accounting-Request Start packet
+   -- state = libwl.radius_send(workload['radius_servers']['acct'], state['packet'], 'secret')
 
-   -- Build RADIUS Accounting-Request Stop packet
-   state = radius_acct_start(state)
+   -- -- Build RADIUS Accounting-Request Stop packet
+   -- state = radius_acct_start(state)
 
-   -- Send RADIUS Accounting-Request Stop packet
-   state = libwl.radius_send(workload['radius_servers']['acct'], state['packet'], 'secret')
+   -- -- Send RADIUS Accounting-Request Stop packet
+   -- state = libwl.radius_send(workload['radius_servers']['acct'], state['packet'], 'secret')
 
    return
 end
